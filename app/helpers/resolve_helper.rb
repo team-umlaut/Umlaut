@@ -67,11 +67,9 @@ module ResolveHelper
   #  <% end %>
   def expand_contract_section(arg_heading, id, options={}, &block)
     expanded = (params["umlaut.show_#{id}"] == "true") || options[:initial_expand] || false
-    icon = image_tag( ( expanded ? "list_open.png" : "list_closed.png"),
-                       :alt => "",
-                       :class => "toggle_icon",
-                       :border => "0")
+    icon = content_tag(:i, nil, :class => [] << ( expanded ? "umlaut_icons-list-open" : "umlaut_icons-list-closed"))
     heading = content_tag(:span,( expanded ? "Hide " : "Show "), :class=>'expand_contract_action_label') + arg_heading
+    body_class = (expanded ? "in" : "")
     link_params = params.merge('umlaut.request_id' => @user_request.id,
       "umlaut.show_#{id}" => (! expanded).to_s,
       # Need to zero out format-related params for when we're coming
@@ -87,14 +85,9 @@ module ResolveHelper
     # Make sure a self-referencing link from partial_html_sections
     # really goes to full HTML view.
     link_params[:action] = "index" if link_params[:action] == "partial_html_sections"
-    return content_tag(:div, :class => "expand_contract_section") do
-      link_to( icon + heading, link_params,
-            :id => "#{id}_toggle_link",
-            :class => "expand_contract_toggle" ) + "\n" +
-        content_tag(:div, :id => id,
-                    :class => "expand_contract_content",
-                    :style => ("display: none;" unless expanded),
-                    &block)
+    return content_tag(:div, :class => "collapsible", :id => "collapse_#{id}") do
+      link_to(icon + heading, link_params, :class => "collapse-toggle", "data-target" => "##{id}", "data-toggle" => "collapse") +
+        content_tag(:div, :id => id, :class => ["collapse"]<< body_class, &block)
     end
   end
 
@@ -205,6 +198,11 @@ module ResolveHelper
     umlaut_config.lookup!("resolve_sections", []).find do |defn|
       defn[:div_id] == div_id
     end
+  end
+
+  def item_icon(section_id)
+    sections_with_icons = ["fulltext", "audio", "excerpts"]
+    content_tag(:i, nil) if sections_with_icons.include? section_id
   end
 
   ##

@@ -1,0 +1,25 @@
+.umlaut-separator {
+  border-top: 1px solid $umlautBorderColor;
+  padding-top: 15px;
+}
+
+.text-small {
+  font: {
+    size: $fontSizeSmall
+  }
+}
+
+.alert {
+  font-size: 125%;
+  li {
+    margin-top: 1em;
+  }
+}
+
+/* Google Scholar Link: 
+   Make the example look like it does on google scholar: */
+.gscholar_example {
+   background: white;
+   color: blue;
+   font-variant: small-caps;
+}

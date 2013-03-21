@@ -1,0 +1,54 @@
+// Bootstrap Variables
+$baseFontSize:                              12px !default;
+$fontSizeSmall:                             $baseFontSize - 1 !default;
+$fontSizeLarge:                             $baseFontSize + 2 !default;
+$baseLineHeight:                            12px !default;
+$linkColor:                                 #0066CC !default;
+// Umlaut Variables
+$umlautGrey:                                darken(whiteSmoke, 9%); // Basic grey
+$umlautAvailableColor:                      #00CC33 !default; // Available Color
+$umlautUnavailableColor:                    red !default; // Unavailable Color
+$umlautIndentLarge:                          12px !default; // Indent for resolve items in main section
+$umlautIndentSmall:                       6px !default; // Indent for resolve items in sidebar
+// Overall Border and Background
+$umlautBorderColor:                         #EBB211 !default;
+$umlautBackgroundColor:                     #FFFDEA !default;
+// A-Z List
+$umlautAzLinkColor:                         $linkColor !default;
+$umlautAzBorderColor:                       #BBBBBB !default;
+$umlautAzBackgroundColor:                   $umlautBackgroundColor !default;
+$umlautAzHoverBackgroundColor:              #EEEEEE !default;
+// Search Border and Background
+$umlautSearchBorderColor:                   $umlautBorderColor !default;
+$umlautSearchBackgroundColor:               #EEEEEE !default;
+// Auto Complete Border and Background
+$umlautAutoCompleteBorderColor:             $umlautGrey !default;
+$umlautAutoCompleteBackgroundColor:         $umlautGrey !default;
+// Results Border and Background
+$umlautResultsBorderColor:                  $umlautGrey !default;
+$umlautResultsBackgroundColor:              $umlautBackgroundColor !default;
+// Permalink Border and Background
+$umlautResolveNavBorderColor:                $umlautBorderColor !default;
+$umlautResolveNavBackgroundColor:            #FCF1D4 !default;
+// Resolve Border and Backgrounds
+$umlautMainBackgroundColor:                 $umlautBackgroundColor !default;
+$umlautSidebarBorderColor:                  $umlautBorderColor !default;
+$umlautSidebarBackgroundColor:              #FCF1D4 !default;
+// Resource Info Border and Backgrounds
+$umlautResourceInfoBorderColor:             $umlautGrey !default;
+$umlautResourceInfoBackgroundColor:         white !default;
+// Help Border and Backgrounds
+$umlautHelpBorderColor:                     $umlautBorderColor !default;
+$umlautHelpBackgroundColor:                 $umlautBackgroundColor !default;
+// Highlighted Sections Border and Backgrounds
+$umlautHighlightedSectionBorderColor:       $umlautGrey !default;
+$umlautHighlightedSectionBackgroundColor:   white !default;
+// Holdings Border and Backgrounds
+$umlautHoldingBorderColor:                  $umlautBorderColor !default;
+$umlautHoldingHighlightBackgroundColor:     $umlautSidebarBackgroundColor !default;
+// Resolve Errors Border and Backgrounds
+$umlautResolveErrorBorderColor:             $umlautGrey !default;
+$umlautResolveErrorBackgroundColor:         white !default;
+// Debug Info Border and Backgrounds
+$umlautDebugInfoBorderColor:                $umlautGrey !default;
+$umlautDebugInfoBackgroundColor:            white !default;

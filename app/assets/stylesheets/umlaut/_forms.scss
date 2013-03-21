@@ -1,0 +1,23 @@
+input[type="submit"] {
+  @extend .btn;
+}
+
+.form-inline {
+  .control-group {
+    padding-left: .5em;
+    display: inline;
+  }
+}
+
+@media (max-width: 767px) {
+  .umlaut-citation-link {
+    text-align: left;
+  }
+
+  .form-inline {
+    .control-group {
+      padding-left: 0;
+      display: block;
+    }
+  }
+}

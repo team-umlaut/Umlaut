@@ -8,26 +8,27 @@
    pipline fingerprinted. sorry, best way to make it work!
 */
 jQuery(document).ready(function($) {
-   
-    $(document).on("click", ".expand_contract_toggle", function() {
-        var content = $(this).next(".expand_contract_content");
-        var icon = $(this).parent().find('img.toggle_icon');
-        
-        if (content.is(":visible")) {  
-          icon.attr("src", icon.attr("src").replace(/list_open[^.]*\.png/, "list_closed.png"));
-          $(this).find(".expand_contract_action_label").text("Show ");
-          
-          content.hide();
-          
-        }
-        else {
-          icon.attr("src", icon.attr("src").replace(/list_closed[^.]*\.png/, "list_open.png"));
-          $(this).find(".expand_contract_action_label").text("Hide ");
-          content.show();
-        }
-        
-        return false;
-    });
-    
-    
+  $(document).on("click", ".collapse-toggle", function(event) {
+    event.preventDefault();
+    $(this).collapse('toggle');
+    return false;
+  });
+  $(document).on("shown", ".collapse", function(event) {
+    // Hack cuz collapse don't work right
+    if($(this).hasClass('in')) {
+      // Update the icon
+      $(this).parent().find('.collapse-toggle i').removeClass("umlaut_icons-list-closed").addClass("umlaut_icons-list-open");
+      // Update the action label
+      $(this).parent().find(".expand_contract_action_label").text("Hide ");
+    }
+  });
+  $(document).on("hidden", ".collapse", function(event) {
+    // Hack cuz collapse don't work right
+    if(!$(this).hasClass('in')) {
+      // Update the icon
+      $(this).parent().find('.collapse-toggle i').removeClass("umlaut_icons-list-open").addClass("umlaut_icons-list-closed");
+      // Update the action label
+      $(this).parent().find(".expand_contract_action_label").text("Show ");
+    }
+  });
 });

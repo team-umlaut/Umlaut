@@ -1,0 +1,254 @@
+.umlaut-resolve-container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.umlaut-resolve-nav {
+  border-bottom: 1px solid $umlautResolveNavBorderColor;
+  background-color: $umlautResolveNavBackgroundColor;
+  padding: .5em;
+  text-align: right;
+}
+
+.umlaut-main, .umlaut-sidebar {
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+}
+
+// Main section styles
+.umlaut-main {
+  @include umlaut-container-padding;
+  background-color: $umlautMainBackgroundColor;
+}
+
+.response_list {
+  .response_item  {
+    margin-left: $umlautIndentLarge;
+    padding-bottom: 5px;
+  }
+}
+
+// Content indents
+.umlaut-content-indent {
+  margin-left: $umlautIndentLarge;
+}
+
+.umlaut-section {
+  margin-top: $baseLineHeight;
+
+  // Response elements
+  [class^="response_"] {
+    @include response-element-margins-large;
+  }
+
+  // Don't indent response links
+  response_link {
+    @include response-element-margins-none;
+  }
+
+  // Special looks for particular sections
+  &.fulltext {
+    @include iconed-response;
+    .response_item i {
+      @extend .umlaut_icons-famfamfam-page-text;
+    }
+  }
+
+  &.audio {
+    @include iconed-response;
+    .response_item i {
+      @extend .umlaut_icons-famfamfam-page-sound;
+    }
+  }
+
+  &.excerpts {
+    @include iconed-response;
+    .response_item i {
+      @extend .umlaut_icons-famfamfam-book-open;
+    }
+  }
+
+  &.coins {
+    border: none;
+  }
+
+  &.document_delivery {
+    @include iconed-response;
+    .response_item i {
+      @extend .umlaut_icons-famfamfam-book-go;
+    }
+  }
+
+  &.holding {
+    .umlaut-holdings {
+      padding-left: $umlautIndentLarge;
+      border-top: 1px solid $umlautHoldingBorderColor;
+      .umlaut-holding {
+        padding: {
+          top: .75em;
+          bottom: 0px;
+          left: .25em;
+          right: .25em;
+        }
+        &:first-child {
+          border-top: none;
+        }
+        &:nth-child(odd) {
+          background-color: $umlautHoldingHighlightBackgroundColor;
+        }
+        a.btn {
+          display:block;
+          margin-bottom: .25em;
+        }
+      }
+    }
+  }
+
+  &.help {
+    @include umlaut-well($umlautHelpBackgroundColor, $umlautHelpBorderColor);
+    padding: 0.5em !important;
+  }
+
+  &.search_inside {
+    input[type="submit"].btn {
+      vertical-align: top;
+    }
+  }
+}
+
+.umlaut-section-highlighted {
+  @include umlaut-well($umlautHighlightedSectionBackgroundColor, $umlautHighlightedSectionBorderColor);
+  padding: 0.5em !important;
+  // Line responses up with collapse caret
+  .response_list {
+    margin-left: 4px;
+  }
+}
+
+.section_prompt {
+  margin-left: $umlautIndentLarge;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.response_edition_warning {
+   color: gray;
+}
+
+.response_source {
+  @extend .muted;
+}
+
+.debug_info {
+  @include umlaut-well($umlautDebugInfoBackgroundColor, $umlautDebugInfoBorderColor);
+}
+
+.umlaut-sidebar {
+  border: {
+    left: 1px solid $umlautSidebarBorderColor;
+    bottom: 1px solid $umlautSidebarBorderColor;
+  }
+  background-color: $umlautSidebarBackgroundColor;
+
+  .umlaut-section {
+    margin: 0.5em 1em;
+    padding: 0 0.5em;
+
+    // Response elements
+    [class^="response_"] {
+      @include response-element-margins-large;
+    }
+
+    // Don't indent response links
+    response_link {
+      @include response-element-margins-none;
+    }
+  }
+
+  .umlaut-help-list {
+    margin-top: .5em;
+    text-align: right;
+  }
+}
+
+.umlaut-resource-info {
+  @include umlaut-well($umlautResourceInfoBackgroundColor, $umlautResourceInfoBorderColor);
+  padding-top: 0;
+  padding-bottom: 0;
+  .resource_info_sections {
+    dl {
+      margin-top: .5em;
+      margin-bottom: .5em;
+      dt, dd {
+        padding-top: .25em;
+      }
+    }
+  }
+}
+
+.umlaut-available {
+  color: $umlautAvailableColor;
+  font-style: italic;
+  font-size: $baseFontSize;
+}
+
+.umlaut-unavailable {
+  color: $umlautUnavailableColor;
+  font-style: italic;
+  font-size: $baseFontSize;
+}
+
+// Resolve Errors
+#service_errors_content {
+  @include umlaut-well($umlautResolveErrorBackgroundColor, $umlautResolveErrorBorderColor);
+}
+
+a:not(:hover) .coverage_summary {
+  /* even though it's part of a hyperlink, we make it black for distinction */
+  color: black; 
+}
+
+@media (max-width: 767px) {
+  #cover_image {
+    display: none;
+  }
+
+  .umlaut-sidebar {
+    @include umlaut-container-padding;
+    background-color: $umlautMainBackgroundColor;
+    border: none;
+    padding-top: 10px;
+
+    .umlaut-section {
+      margin-left: 0;
+      padding-left: 0;
+
+      &.holding {
+        .umlaut-holdings {
+          padding-left: 0px;
+        }
+      }
+    }
+
+    .umlaut-help-list {
+      text-align: left;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .umlaut-section {
+    &.holding {
+      .umlaut-holdings {
+        .umlaut-holding {
+          a.btn {
+            padding-left: 3px;
+            padding-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}

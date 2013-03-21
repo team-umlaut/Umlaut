@@ -1,0 +1,51 @@
+@mixin umlaut-container-padding {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@mixin umlaut_icons {
+  background: {
+    image: image-url("umlaut_icons.png");
+    repeat: no-repeat;
+  }
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  @include ie7-restore-right-whitespace();
+  line-height: 16px;
+  vertical-align: middle;
+  margin-top: 1px;
+}
+
+@mixin iconed-response {
+  .response_item  {
+    a {
+      font-weight: bold;
+    }
+    i {
+      @include umlaut_icons;
+    }
+  }
+}
+
+@mixin umlaut-well($backgroundColor, $borderColor) {
+  @extend .well;
+  @extend .well-small;
+  background-color: $backgroundColor;
+  border-color: $borderColor;
+}
+
+@mixin response-element-margins-large {
+  margin-top: $baseLineHeight/4;
+  margin-left: $umlautIndentLarge;
+}
+
+@mixin response-element-margins-small {
+  margin-left: $umlautIndentSmall;
+}
+
+
+@mixin response-element-margins-none {
+  margin-top: 0;
+  margin-left: 0;
+}

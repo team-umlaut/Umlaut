@@ -9,7 +9,6 @@ gemspec
 group :development, :test do
   platforms :jruby do
     gem 'activerecord-jdbc-adapter', :require => false
-    gem 'jdbc-mysql', :require => false
     gem 'jruby-rack'
     gem 'therubyrhino'
     gem 'jruby-prof'
@@ -26,7 +25,6 @@ group :development, :test do
     gem 'debugger'
   end
 
-  gem 'jquery-rails'
   gem "activerecord-import"
 end
 
@@ -37,4 +35,3 @@ gem "coveralls", "~> 0.6.0", :require => false, :group => :test
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
-
