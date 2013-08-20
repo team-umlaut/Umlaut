@@ -4,12 +4,12 @@
 # http://www.exlibrisgroup.org/display/SFXOI/Rapid+Service+Indicator
 # (needs login)
 
+
 class SfxRsi < Service
   include MetadataHelper
 
   attr_writer :ip, :institute
-  attr_reader :message, :fulltext_found, :status_ok
-
+  attr_reader :message, :fulltext_found, :service_status
   def service_types_generated
     [ ServiceTypeValue['fulltext'] ]
   end
@@ -24,10 +24,9 @@ class SfxRsi < Service
     response = send_query(query)
     process_response(response)
 
-    request.dispatched(self, @status_ok)
+    request.dispatched(self, @service_status)
   end
 
-  # Process request to extract metadata for api call
   def get_data(request)
     metadata = request.referent.metadata
     data = {}
@@ -45,7 +44,6 @@ class SfxRsi < Service
     data
   end
 
-  # Convert metadata hash to xml query as per RSI spec
   def build_query(data)
     return if !data.has_key?(:identifier) || data[:identifier].empty?
 
@@ -65,33 +63,29 @@ class SfxRsi < Service
     builder.to_xml
   end
 
-  # Send query via GET
-  # POST is preferred but didn't work for me
   def send_query(query)
     client = HTTPClient.new
     response = client.get(@base_url, {:request_xml => query } )
     response.content
   end
 
-  # Run processing on XML response
   def process_response(response)
     xml = Nokogiri::XML(response)
     #if we got a bad response - log and quit
-    check_service_status(xml)
-    unless @status_ok
+    unless request_ok?(xml)
       Rails.logger.error("Error in SFX RSI query: #{get_message(xml)}")
       return
     end
     check_for_fulltext(xml)
   end
 
-  # Check service status in api response
-  def check_service_status(xml)
+  #check service status in api response
+  def request_ok?(xml)
     request_message = xml.xpath("IDENTIFIER_RESPONSE/IDENTIFIER_REQUEST_RESULT").attr('RESULT').content
-    @status_ok = request_message.downcase.include? "ok"
+    @service_status = request_message.downcase.include? "ok"
   end
 
-  # If item is not found
+# if item is not found
   # return error message OR result message
   def get_message(item)
     details =  item.xpath('IDENTIFIER_RESPONSE_DETAILS')
@@ -102,7 +96,7 @@ class SfxRsi < Service
     end
   end
 
-  # see if we have a result: found, otherwise get the error message
+  #see if we have a result: found, otherwise get the error message
   def check_for_fulltext(xml)
     #return true if we get a single hit
     items = xml.xpath('IDENTIFIER_RESPONSE/IDENTIFIER_RESPONSE_ITEM')
