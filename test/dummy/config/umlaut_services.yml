@@ -22,7 +22,8 @@ default:
       
       SFX:
         type: Sfx
-        display_name: Find It       
+        display_name: Find It
+        related_title_label: "May be available under related title"
         base_url: http://sfx.library.edu/local
         disabled: true
         priority: 3      
@@ -33,6 +34,10 @@ default:
           - 'SPRINGER_LINK_'
           - 'ELSEVIER_SD_'
           - 'HIGHWIRE_'
+        preferred_targets:
+          - 'HIGHWIRE_PRESS_JOURNALS'
+        sunk_targets:
+          - 'JSTOR_EARLY_JOURNAL_CONTENT_FREE'
       
       # First half of Amazon, run in foreground, get metadata and cover images.
       Amazon:
