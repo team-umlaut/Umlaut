@@ -12,22 +12,22 @@ require 'test_helper'
 
 class SfxTargetPrecedenceTest < ActiveSupport::TestCase
 
-  def test_roll_up_responses_noop_with_no_config
+  def test_preferred_target_appears_first
     sfx = Sfx.new({'priority' => 1, 
                    'base_url' => "http://example.org"
     })
     
-    new_list = sfx.sort_preferred_responses(@@svc_list_example_science, :coverage_sensitive => false)
+    new_list = sfx.sort_preferred_responses(@@svc_list_example_science)
       
     assert_equal new_list.first[:sfx_target_name], 'HIGHWIRE_PRESS_JOURNALS'
   end
 
-  def test_roll_up_responses_noop_with_no_config
+  def test_sunk_target_appears_last
     sfx = Sfx.new({'priority' => 1, 
                    'base_url' => "http://example.org"
     })
     
-    new_list = sfx.sort_sunk_responses(@@svc_list_example_science, :coverage_sensitive => false)
+    new_list = sfx.sort_sunk_responses(@@svc_list_example_science)
       
     assert_equal new_list.last[:sfx_target_name], 'JSTOR_EARLY_JOURNAL_CONTENT_FREE'
   end
