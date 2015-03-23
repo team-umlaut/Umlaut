@@ -19,6 +19,7 @@ class SfxTargetPrecedenceTest < ActiveSupport::TestCase
     })
     new_list = sfx.sort_preferred_responses(@@svc_list_example)
     assert_not_same @@svc_list_example, new_list
+      
     assert_equal new_list.first[:sfx_target_name], 'HIGHWIRE_PRESS_JOURNALS'
   end
 
@@ -60,6 +61,7 @@ class SfxTargetPrecedenceTest < ActiveSupport::TestCase
   end
 
   @@svc_list_example = [
+
     { :display_text => "JSTOR Early Journal Content",
       :sfx_target_name => "JSTOR_EARLY_JOURNAL_CONTENT_FREE",
       :coverage_begin_date => Date.new(1880,1,1),
