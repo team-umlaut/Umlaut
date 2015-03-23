@@ -14,25 +14,52 @@ class SfxTargetPrecedenceTest < ActiveSupport::TestCase
 
   def test_preferred_target_appears_first
     sfx = Sfx.new({'priority' => 1, 
-                   'base_url' => "http://example.org"
+                   'base_url' => "http://example.org",
+                   'preferred_targets' => ['HIGHWIRE_PRESS_JOURNALS']
     })
-    
-    new_list = sfx.sort_preferred_responses(@@svc_list_example_science)
-      
+    new_list = sfx.sort_preferred_responses(@@svc_list_example)
+    assert_not_same @@svc_list_example, new_list
     assert_equal new_list.first[:sfx_target_name], 'HIGHWIRE_PRESS_JOURNALS'
   end
 
   def test_sunk_target_appears_last
     sfx = Sfx.new({'priority' => 1, 
-                   'base_url' => "http://example.org"
+                   'base_url' => "http://example.org",
+                   'sunk_targets' => ['JSTOR_EARLY_JOURNAL_CONTENT_FREE']
     })
     
-    new_list = sfx.sort_sunk_responses(@@svc_list_example_science)
-      
+    new_list = sfx.sort_sunk_responses(@@svc_list_example)
+    assert_not_same @@svc_list_example, new_list
     assert_equal new_list.last[:sfx_target_name], 'JSTOR_EARLY_JOURNAL_CONTENT_FREE'
   end
 
-  @@svc_list_example_science = [
+  def test_preferred_targets_appear_in_order
+    sfx = Sfx.new({'priority' => 1, 
+                   'base_url' => "http://example.org",
+                   'preferred_targets' => ['PROQUEST_CENTRAL_NEW_PLATFORM', 'HIGHWIRE_PRESS_JOURNALS']
+    })
+    new_list = sfx.sort_preferred_responses(@@svc_list_example)
+    assert_not_same @@svc_list_example, new_list
+    first_target = new_list[0]
+    second_target = new_list[1]
+    assert_equal first_target[:sfx_target_name], 'PROQUEST_CENTRAL_NEW_PLATFORM'
+    assert_equal second_target[:sfx_target_name], 'HIGHWIRE_PRESS_JOURNALS'
+  end
+
+  def test_sunk_targets_appear_in_order
+    sfx = Sfx.new({'priority' => 1, 
+                   'base_url' => "http://example.org",
+                   'sunk_targets' => ['GALEGROUP_GREENR', 'EBSCOHOST_MAS_ULTRA_SCHOOL_EDITION']
+    })
+    new_list = sfx.sort_sunk_responses(@@svc_list_example)
+    assert_not_same @@svc_list_example, new_list
+    first_target = new_list[-2]
+    second_target = new_list.last
+    assert_equal first_target[:sfx_target_name], 'GALEGROUP_GREENR'
+    assert_equal second_target[:sfx_target_name], 'EBSCOHOST_MAS_ULTRA_SCHOOL_EDITION'
+  end
+
+  @@svc_list_example = [
     { :display_text => "JSTOR Early Journal Content",
       :sfx_target_name => "JSTOR_EARLY_JOURNAL_CONTENT_FREE",
       :coverage_begin_date => Date.new(1880,1,1),
