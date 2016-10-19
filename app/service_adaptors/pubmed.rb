@@ -10,7 +10,7 @@ class Pubmed < Service
   
   def initialize(config)
     @display_name = "PubMed"
-    @url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
+    @url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
     super(config)
   end
   
