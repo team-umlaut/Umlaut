@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency "scrub_rb", ">= 1.0.1", "<2" # used for correcting bad char enc bytes in input, polyfill pre ruby 2.1
   s.add_dependency "bootstrap-sass", "~> 3.2"   # used for bootstrap
   s.add_dependency "sass-rails", ">= 3.2.5"     # umlaut uses sass stylesheets
+  s.add_dependency 'hashie', '3.4.4'            # hashie 3.4.5 and later break umlaut.
   
 
   s.add_development_dependency "uglifier", "~> 1.3"
